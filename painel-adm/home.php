@@ -68,7 +68,7 @@
         <div class="projects">
           <div class="card">
             <div class="card-header">
-              <h3>Projetos Recentes</h3>
+              <h3>Compras Recentes</h3>
               <button>Ver Todos <span class="las la-arrow-right"></span></button>
             </div>
 
@@ -76,7 +76,7 @@
               <table width="100%" class="table-responsive">
                 <thead>
                   <tr>
-                    <td>Título do Projeto</td>
+                    <td>Nome do Produto</td>
                     <td>Departamento</td>
                     <td>Status</td>
                   </tr>
@@ -102,32 +102,31 @@
                     <td>Ushop app</td>
                     <td>Mobile Team</td>
                     <td>
+                      <span class="status pink"></span>
+                      pending
+                    </td>
+                  </tr>
+                   <tr>
+                    <td>Ushop app</td>
+                    <td>Mobile Team</td>
+                    <td>
                       <span class="status orange"></span>
                       pending
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>UI/UX Designer</td>
-                    <td>UI Team</td>
-                    <td>
-                      <span class="status"></span>
-                      review
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Web developement</td>
-                    <td>Frontend</td>
-                    <td>
-                      <span class="status"></span>
-                      in progress
-                    </td>
-                  </tr>
-                  <tr>
+                   <tr>
                     <td>Ushop app</td>
                     <td>Mobile Team</td>
                     <td>
-                      <span class="status"></span>
+                      <span class="status purple"></span>
+                      pending
+                    </td>
+                  </tr>
+                   <tr>
+                    <td>Ushop app</td>
+                    <td>Mobile Team</td>
+                    <td>
+                      <span class="status pink"></span>
                       pending
                     </td>
                   </tr>
@@ -140,7 +139,7 @@
         <div class="customers">
           <div class="card">
             <div class="card-header">
-              <h3>Nes customer</h3>
+              <h3>Fornecedores</h3>
               <button>Ver Todos <span class="las la-arrow-right"></span></button>
             </div>
 

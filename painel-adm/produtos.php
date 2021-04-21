@@ -256,9 +256,7 @@ if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		var pag = "<?=$pagina?>";
-
 		$.ajax({
 			url: pag + "/listar.php",
 			method: "post",
@@ -266,8 +264,53 @@ if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){
 			dataType: "html",
 			success: function(result){
 				$('#listar').html(result)
-
+				$('#btn-buscar').click();
 			},
 		})
 	})
+</script>
+
+
+
+<script type="text/javascript">
+	$("#form-inserir").submit(function () {
+		var pag = "<?=$pagina?>";
+		event.preventDefault();
+		var formData = new FormData(this);
+
+		$.ajax({
+			url: pag + "/inserir.php",
+			type: 'POST',
+			data: formData,
+
+			success: function(mensagem){
+
+				$('#mensagem').removeClass()
+
+				if(mensagem == 'Cadastrado com Sucesso!!'){
+
+					$('#btn-buscar').click();
+					$('#btn-fechar').click();
+
+				}else{
+					$('#mensagem').addClass('text-danger')
+				}
+				$('#mensagem').text(mensagem)
+
+			},
+
+			cache: false,
+			contentType: false,
+			processData: false,
+        xhr: function() {  // Custom XMLHttpRequest
+        	var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+            	myXhr.upload.addEventListener('progress', function () {
+            		/* faz alguma coisa durante o progresso do upload */
+            	}, false);
+            }
+            return myXhr;
+        }
+    });
+	});
 </script>

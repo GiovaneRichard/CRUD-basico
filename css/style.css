@@ -55,6 +55,10 @@
 	font-size: 1.1rem;
 }
 
+.sidebar-menu a:hover{
+	background: tomato;
+}
+
 .sidebar-menu a.active{
 	background: #fff;
 	padding-top: 1rem;
@@ -236,7 +240,7 @@ main{
 }
 
 .card-header button{
-	background: var(--main-color);
+	background: var(--main-color2);
 	border-radius: 10px;
 	color: #fff;
 	font-size: .8rem;
@@ -279,6 +283,7 @@ tr td:last-child{
 	display: flex;
 	align-items: center;
 }
+
 
 .status.purple{
 	background: rebeccapurple;	
@@ -507,42 +512,60 @@ tr td:last-child{
 	
 }
 
-.table{
+.table-prod{
 	width: 100%;
 	text-align: left;
 	max-width: 100%;
-	font-size: 1.2rem;
-	line-height: 1;
+	font-size: 1rem;
 	text-transform: uppercase;
 	background: #fff;
 	border-collapse: collapse;
 	border: 1px solid #d7d7d7;
+	padding-bottom: 20px;
 }
 
-.table th,
-.table td{
+.table-prod td i{
+	display: flex;
+	font-size: 1.2rem;
+}
+
+.table-prod td a{
+	text-decoration: none;
+}
+
+
+.table-prod th,
+.table-prod td{
 	color: #222120;
 	background: #fff;
+	align-items: center;
 }
 
-.table th{
+.table-prod th{
 	padding: 29px 15px 27px;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #9b9b9b;
-	border-bottom: 1px solid #d7d7d7;
+	
 }
 
 @media (max-width: 991px){
-	.table th{
+	.table-prod th{
 		padding-top: 18px;
 		padding-bottom: 14px;
 	}
 }
 
-.table td{
+.table-prod td{
 	padding: 12px 15px;
-	line-height: 1;
-	font-weight: 500;
+	font-weight: 400;
 	color: var(--main-color);
+}
+
+nav.paginacao{
+	padding-top: 10px;
+}
+
+.link_p a{
+	text-decoration: none;
 }
