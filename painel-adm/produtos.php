@@ -23,7 +23,7 @@
       <div class="user-wrapper">
         <img src="../img/profile.jpg" width="50px" height="50px" alt="">
         <div>
-          <h4><?php echo $_SESSION['nome_usuario'] ?></h4>
+          <h4><?php echo @$_SESSION['nome_usuario'] ?></h4>
           <small>Administrador</small>
         </div>
       </div>
@@ -37,14 +37,14 @@
  <div class="container ml-2 mr-2">
 	<nav class="navbar navbar-expand navbar-white navbar-light">
 		
-		<a id="btn-novo" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Novo Produto</a>
+		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Novo Produto</a>
+
 		
 		<form method="post" id="frm">
 			<input type="hidden" name="pag" id="pag" value="<?php echo $pagina_pag ?>">
 			<input type="hidden" name="itens_pag" id="itens_pag" value="<?php echo $itens_pag ?>">
 		</form>
 		
-
 		<div class="direita">
 			<!-- SEARCH FORM -->
 			<form class="form-inline ml-3 float-right">
@@ -82,10 +82,13 @@
 
 	</nav>
 
-	<!-- Listar -->
+
+	<!-- LISTAR PRODUTOS -->
 	<div id="listar">
 		
 	</div>
+
+
 
 </div>	
       
@@ -96,38 +99,42 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="modal-prod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<?php if(@$_GET['funcao']=='editar'){
-					$titulo_modal = 'Editar Dados';
-					$botao = 'Editar';
 
-					$id_prd = @$_GET['id'];
-					$res = $pdo->query("SELECT * from produtos where id = '$id_prd'");
+				<?php if(@$_GET['funcao'] == 'editar'){
+					$titulo_modal = 'Editar Dados do Produto';
+					$botao = 'Editar';
+					
+
+					$id_reg = @$_GET['id'];
+					$res = $pdo->query("SELECT * from produtos where id = '$id_reg'");
 					$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 					$nome = $dados[0]['nome'];
 					$descricao = $dados[0]['descricao'];
-					$descricao_longa  = $dados[0]['descricao_longa'];
+					$descricao_longa = $dados[0]['descricao_longa'];
 					$valor = $dados[0]['valor'];
 					$categoria = $dados[0]['categoria'];
 					$imagem = $dados[0]['imagem'];
 					$form = 'form-editar';
 
 					$dnone = 'd-none';
+					
 
 				}else{
 					$titulo_modal = 'Inserir Novo Produto';
 					$botao = 'Salvar';
 					$form = 'form-inserir';
 				} ?>
-				<h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo_modal ?>
-				</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
+				<h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo_modal ?></h5>
+			
+			<button class="btn-close" type="button" data-dismiss="modal" aria-label="Close">
+ 				
+ 			</button>
+		</div>
 			<div class="modal-body mt-4">
 
 
@@ -220,11 +227,10 @@
 						<?php } ?>
 
 
-
-			
 					<div align="center" id="mensagem" class="">
 
 					</div>
+
 
 					</div>
 					<div class="modal-footer">
@@ -248,12 +254,57 @@
 if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){ 
 	
 ?>
-	<script>$('#modal').modal("show");</script>
+	<script>$('#modal-prod').modal("show");</script>
 <?php } ?>
 
 
 
 
+<!--CHAMADA DA MODAL DELETAR -->
+<?php 
+if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){ 
+	$id = $_GET['id'];
+?>
+
+ <div class="modal fade" id="modal-deletar" tabindex="-1" role="dialog">
+ 	<div class="modal-dialog" role="document">
+ 		<div class="modal-content">
+ 			<div class="modal-header">
+ 				<h5 class="modal-title">Excluir Registro</h5>
+ 				<button class="btn-close" type="button" data-dismiss="modal" aria-label="Close">
+ 				
+ 				</button>
+ 			</div>
+ 			<div class="modal-body">
+ 				<p>Deseja ralmente Excluir este Registro?</p>
+
+ 				<div class="" align="center" id="mensagem_excluir">
+ 					
+ 				</div>
+
+ 			</div>
+ 			<div class="modal-footer">
+ 				<button class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar	
+ 				</button>
+ 				<form method="post">
+ 					<input type="hidden" id="id" name="id" value="<?php echo @$id ?>" required>
+ 					<button class="btn btn-danger" type="button" id="btn-deletar" name="btn-deletar">
+ 						Excluir
+ 					</button>
+ 				</form>
+ 			</div>
+
+ 		</div>
+ 	</div>
+ </div>
+
+<?php } ?>
+
+<script>$('#modal-deletar').modal("show");</script>
+
+
+
+<!-- LISTAR -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		var pag = "<?=$pagina?>";
@@ -272,6 +323,8 @@ if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){
 
 
 
+
+<!-- INCERÇÃO -->
 <script type="text/javascript">
 	$("#form-inserir").submit(function () {
 		var pag = "<?=$pagina?>";
@@ -313,4 +366,87 @@ if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){
         }
     });
 	});
+</script>
+
+<!--AJAX PARA EDIÇÃO DOS DADOS COM IMAGEM -->
+<script type="text/javascript">
+	$("#form-editar").submit(function () {
+		var pag = "<?=$pagina?>";
+		event.preventDefault();
+		var formData = new FormData(this);
+
+		$.ajax({
+			url: pag + "/editar.php",
+			type: 'POST',
+			data: formData,
+
+			success: function(mensagem){
+
+				$('#mensagem').removeClass()
+
+				if(mensagem == 'Editado com Sucesso!!'){
+
+					$('#btn-buscar').click();
+					$('#btn-fechar').click();
+
+				}else{
+
+					$('#mensagem').addClass('text-danger')
+				}
+
+				$('#mensagem').text(mensagem)
+
+			},
+
+			cache: false,
+			contentType: false,
+			processData: false,
+        xhr: function() {  // Custom XMLHttpRequest
+        	var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+            	myXhr.upload.addEventListener('progress', function () {
+            		/* faz alguma coisa durante o progresso do upload */
+            	}, false);
+            }
+            return myXhr;
+        }
+    });
+	});
+</script>
+
+
+<!--AJAX PARA EXCLUSÃO DOS DADOS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var pag = "<?=$pagina?>";
+		$('#btn-deletar').click(function(event){
+			event.preventDefault();
+			
+			$.ajax({
+				url: pag + "/excluir.php",
+				method: "post",
+				data: $('form').serialize(),
+				dataType: "text",
+				success: function(mensagem){
+
+					$('#mensagem_excluir').removeClass()
+
+					if(mensagem == 'Excluído com Sucesso!!'){
+
+						$('#txtbuscar').val('')
+						$('#btn-buscar').click();
+						$('#btn-cancelar-excluir').click();
+
+					}else{
+
+						$('#mensagem_excluir').addClass('text-danger')
+					}
+
+					$('#mensagem_excluir').text(mensagem)	
+
+				},
+				
+			})
+		})
+	})
 </script>

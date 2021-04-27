@@ -1,3 +1,15 @@
+<?php 
+  $res = $pdo->query("SELECT * FROM produtos");
+  $dados = $res->fetchAll(PDO::FETCH_ASSOC);
+  $qtd_produtos = count($dados);
+
+  $soma = $pdo->query("SELECT SUM(valor) AS total FROM produtos")->fetchColumn();
+  $media = $soma/$qtd_produtos;
+  $valor_soma = str_replace('.', ',', $soma);
+  
+ ?>
+
+
 <div class="main-content">
     <header>
       <h2>
@@ -9,13 +21,13 @@
 
       <div class="search-wrapper">
         <span class="las la-search"></span>
-        <input type="search" name="" placeholder="Buscar...">
+        <input type="search" id="txtbuscar" name="txtbuscar" placeholder="Buscar...">
       </div>
 
       <div class="user-wrapper">
         <img src="../img/profile.jpg" width="50px" height="50px" alt="">
         <div>
-          <h4><?php echo $_SESSION['nome_usuario'] ?></h4>
+          <h4 class="log">Convidado</h4>
           <small>Administrador</small>
         </div>
       </div>
@@ -25,8 +37,8 @@
       <div class="cards">
         <div class="card-single">
           <div>
-            <h1>54</h1>
-            <span>Customers</span>
+            <h1>55</h1>
+            <span>Clientes</span>
           </div>
           <div>
             <span class="las la-users"></span>
@@ -35,8 +47,8 @@
 
         <div class="card-single">
           <div>
-            <h1>79</h1>
-            <span>Projects</span>
+            <h1><?php echo $valor_soma ?></h1>
+            <span class="teste">Valor Total</span>
           </div>
           <div>
             <span class="las la-clipboard-list"></span>
@@ -45,8 +57,8 @@
 
         <div class="card-single">
           <div>
-            <h1>124</h1>
-            <span>Orders</span>
+            <h1><?php echo $qtd_produtos; ?></h1>
+            <span>Produtos</span>
           </div>
           <div>
             <span class="las la-shopping-bag"></span>
@@ -55,8 +67,8 @@
 
         <div class="card-single">
           <div>
-            <h1>R$ 6k</h1>
-            <span>Income</span>
+            <h1>R$ 6,345</h1>
+            <span>Total</span>
           </div>
           <div>
             <span class="lab la-google-wallet"></span>
@@ -130,6 +142,7 @@
                       pending
                     </td>
                   </tr>
+
                 </tbody>
               </table>
             </div>

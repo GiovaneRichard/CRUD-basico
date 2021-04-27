@@ -55,9 +55,6 @@
 	font-size: 1.1rem;
 }
 
-.sidebar-menu a:hover{
-	background: tomato;
-}
 
 .sidebar-menu a.active{
 	background: #fff;
@@ -66,9 +63,10 @@
 	color: var(--main-color2);
 	border-radius: 30px 0 0 30px;
 }
+ 
 
 .sidebar-menu a span:first-child{
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	padding-right: 1rem;
 }
 
@@ -127,7 +125,7 @@ header{
 }
 
 header h2{
-	color: #222;
+	color: var(--text-grey);
 }
 
 header label span{
@@ -197,6 +195,7 @@ main{
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
+
 .card-single div:last-child span{
 	font-size: 3rem;
 	color: var(--main-color2);
@@ -205,6 +204,7 @@ main{
 .card-single div:first-child span{
 	color: var(--text-grey);
 }
+
 
 .card-single:last-child{
 	background: var(--main-color2);
@@ -424,6 +424,7 @@ tr td:last-child{
 		align-items: center;
 	}
 
+
 	header h2 label{
 		display: inline-block;
 		text-align: center;
@@ -445,7 +446,7 @@ tr td:last-child{
 	}
 
 	header h2{
-		font-size: 1.1rem;
+		font-size: .9rem;
 	}
 
 	.main-content{
@@ -508,7 +509,7 @@ tr td:last-child{
 
 
 #listar{
-	padding-top: 90px;
+	padding-top: 70px;
 	
 }
 
@@ -557,7 +558,7 @@ tr td:last-child{
 }
 
 .table-prod td{
-	padding: 12px 15px;
+	padding: 10px;
 	font-weight: 400;
 	color: var(--main-color);
 }

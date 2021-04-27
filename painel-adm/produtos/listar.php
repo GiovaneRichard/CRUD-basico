@@ -9,7 +9,7 @@
 
 
 echo '
-<div>
+<div class="card-body">
 	<table class="table-prod">
 	  <thead>
 	    <tr>
@@ -19,27 +19,27 @@ echo '
 	      <th scope="col">Categoria</th>
 	      <th scope="col">Imagem</th>
 
-	      <th class="icones" scope="col">Ações</th>
+	      <th scope="col">Ações</th>
 	    </tr>
 	  </thead>
 	  <tbody>';
 
-	$itens_pag = intval(@$_POST['itens_pag']);
+		$itens_pag = intval(@$_POST['itens_pag']);
 
-	// CORREÇÃO DA DIVISÃO POR ZERO
-	if($itens_pag == 0 ){
-		$itens_pag = $itens_por_pagina_1;
-	}
+		// CORREÇÃO DA DIVISÃO POR ZERO
+		if($itens_pag == 0 ){
+			$itens_pag = $itens_por_pagina_1;
+		}
 
-	if($itens_pag != ''){
-		$itens_por_pagina = $itens_pag;
-	}
-	$pagina_pag = intval(@$_POST['pag']);
+		if($itens_pag != ''){
+			$itens_por_pagina = $itens_pag;
+		}
+		$pagina_pag = intval(@$_POST['pag']);
 
-	$limite = $pagina_pag * $itens_por_pagina;
+		$limite = $pagina_pag * $itens_por_pagina;
 
-	//CAMINHO DA PAGINAÇÃO
-	$caminho_pag = 'index.php?acao='.$pagina.'&';
+		//CAMINHO DA PAGINAÇÃO
+		$caminho_pag = 'index.php?acao='.$pagina.'&';
 
 	if($txtbuscar == '' and $cbbuscar == ''){
 		$res = $pdo->query("SELECT * from produtos order by nome asc LIMIT $limite, $itens_por_pagina");
@@ -54,47 +54,52 @@ echo '
 	
 	$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 
-	$res_todos = $pdo->query("SELECT * FROM produtos");
-	$dado_total = $res_todos->fetchAll(PDO::FETCH_ASSOC);
-	$num_total = count($dado_total);
+	$res_todos = $pdo->query("SELECT * from produtos");
+	$dados_total = $res_todos->fetchAll(PDO::FETCH_ASSOC);
+	$num_total = count($dados_total);
+
 
 	$num_paginas = ceil($num_total/$itens_por_pagina);
 
 	for ($i=0; $i < count($dados); $i++) { 
-		foreach ($dados[$i] as $key => $value) {
-			# code...
-		}
+			foreach ($dados[$i] as $key => $value) {
+			}
 
-		$id = $dados[$i]['id'];
-		$nome = $dados[$i]['nome'];
-		$descricao = $dados[$i]['descricao'];
-		$valor = $dados[$i]['valor'];
-		$categoria = $dados[$i]['categoria'];
-		$imagem = $dados[$i]['imagem'];
-
-		$res_cat = $pdo->query("SELECT * FROM categorias WHERE id = '$categoria'");
-		$dados_cat = $res_cat->fetchAll(PDO::FETCH_ASSOC);
-		$nome_cat = $dados_cat[0]['nome'];
+			$id = $dados[$i]['id'];	
+			$nome = $dados[$i]['nome'];
+			
+			$descricao = $dados[$i]['descricao'];
+			$valor = $dados[$i]['valor'];
+			$categoria = $dados[$i]['categoria'];
+			$imagem = $dados[$i]['imagem'];
+			
+			//recuperar o nome da categoria
+			$res_cat = $pdo->query("SELECT * from categorias where id = '$categoria'");
+			$dados_cat = $res_cat->fetchAll(PDO::FETCH_ASSOC);
+			$nome_cat = $dados_cat[0]['nome'];
 
 echo '
+		<tr>
 
-	    <tr>
-	      
-	      <td>'.$nome.'</td>
-	      <td>'.$descricao.'</td>
-	      <td>'.$valor.'</td>
-	      <td>'.$nome_cat.'</td>
-	      <td><img src="../img/produtos/'.$imagem.'" width="50"></td>
-
-	      <td>
+			
+			<td>'.$nome.'</td>
+			
+			
+			<td class="d-none d-md-block">'.$descricao.'</td>
+			<td>'.$valor.'</td>
+			<td class="d-none d-md-block">'.$nome_cat.'</td>
+			<td><img src="../img/produtos/'.$imagem.'" width="50"></td>
+			
+			
+			<td>
 				<a href="index.php?acao='.$pagina.'&funcao=editar&id='.$id.'"><i class="fas fa-edit text-info"></i></a>
-				<a href="index.php?acao='.$pagina.'&funcao=excluir&id='.$id.'" ><i class="far fa-trash-alt text-danger"></i></a>
+				<a href="index.php?acao='.$pagina.'&funcao=excluir&id='.$id.'"><i class="far fa-trash-alt text-danger"></i></a>
 			</td>
-	    </tr>';
-	    
-	}  
+		</tr>';
 
-echo '
+	}
+
+echo  '
 	  </tbody>
 
 	</table>
