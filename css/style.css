@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root{
-	--main-color2: #DD2F6E;
+	--main-color2: #2a9d8f;
 	/*--main-color: #007996;*/
-	--main-color: #2F4F4F;
+	--main-color: #264653;
 	--color-dark: #1D2231;
 	--text-grey: #8390A2;
 }
@@ -240,6 +240,16 @@ main{
 }
 
 .card-header button{
+	background: var(--main-color2);
+	border-radius: 10px;
+	color: #fff;
+	font-size: .8rem;
+	padding: .5rem 1rem;
+	border: 1px solid var(--main-color);
+	
+}
+
+.card-header .btn{
 	background: var(--main-color2);
 	border-radius: 10px;
 	color: #fff;

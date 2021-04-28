@@ -1,5 +1,5 @@
 <?php 
-$pagina = 'produtos';
+$pagina = 'categorias';
 
 $pagina_pag = intval(@$_GET['pagina']);
 $itens_pag = intval(@$_GET['itens']);
@@ -12,7 +12,7 @@ $itens_pag = intval(@$_GET['itens']);
 <div class="container ml-2 mr-2">
 	<nav class="navbar navbar-expand navbar-white navbar-light">
 		
-		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Novo Produto</a>
+		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Nova Categoria</a>
 		
 		<form method="post" id="frm">
 			<input type="hidden" name="pag" id="pag" value="<?php echo $pagina_pag ?>">
@@ -24,34 +24,12 @@ $itens_pag = intval(@$_GET['itens']);
 			<!-- SEARCH FORM -->
 			<form class="form-inline ml-3 float-right">
 				<div class="input-group input-group-sm">
-
-					<div class="form-group mr-2">
-						
-						<select class="form-select" id="cbbuscar" name="cbbuscar">
-							<option value="">Buscar Categoria</option>
-							<?php 
-
-								//TRAZER TODOS OS REGISTROS EXISTENTES
-							$res = $pdo->query("SELECT * from categorias order by nome asc");
-							$dados = $res->fetchAll(PDO::FETCH_ASSOC);
-
-							for ($i=0; $i < count($dados); $i++) { 
-								foreach ($dados[$i] as $key => $value) {
-								}
-
-								$id_categ = $dados[$i]['id'];	
-								$nome_categ = $dados[$i]['nome'];
-
-
-								echo '<option value="'.$id_categ.'">'.$nome_categ.'</option>';
-
-
-							}
-							?>
-						</select>
+					<input class="form-control form-control-navbar" type="search" name="txtbuscar" id="txtbuscar" placeholder="Buscar" aria-label="Search">
+					<div class="input-group-append">
+						<button class="btn btn-navbar" type="submit" id="btn-buscar">
+							<i class="fas fa-search"></i>
+						</button>
 					</div>
-
-					
 				</div>
 			</form>
 		</div>
@@ -72,27 +50,21 @@ $itens_pag = intval(@$_GET['itens']);
 		<div class="modal-content">
 			<div class="modal-header">
 				<?php if(@$_GET['funcao']=='editar'){
-					$titulo_modal = 'Editar Dados do Produto';
+					$titulo_modal = 'Editar Categoria';
 					$botao = 'Editar';
 
 
 					//RECUPERAR OS DADOS COM BASE NO ID QUE RECEBO
-					$id_reg = @$_GET['id'];
-					$res = $pdo->query("SELECT * from produtos where id = '$id_reg'");
+					$id = @$_GET['id'];
+					$res = $pdo->query("SELECT * from categorias where id = '$id'");
 					$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 					$nome = $dados[0]['nome'];
 					$descricao = $dados[0]['descricao'];
-					$descricao_longa = $dados[0]['descricao_longa'];
-					$valor = $dados[0]['valor'];
-					$categoria = $dados[0]['categoria'];
 					$imagem = $dados[0]['imagem'];
 					$form = 'form-editar';
 
-					$dnone = 'd-none';
-					
-
 				}else{
-					$titulo_modal = 'Inserir Novo Produto';
+					$titulo_modal = 'Inserir Nova Categoria';
 					$botao = 'Salvar';
 					$form = 'form-inserir';
 				} ?>
@@ -108,13 +80,13 @@ $itens_pag = intval(@$_GET['itens']);
 
 
 				<div class="row">
-					<div class="col-md-3 mt-3">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nome</label>
 							<input type="text" class="form-control" id="nome" placeholder="Insira o Nome " name="nome" value="<?php echo @$nome ?>" required>
 						</div>
 					</div>
-					<div class="col-md-4 mt-3">
+					<div class="col-md-4">
 						<div class="form-group">
 
 
@@ -123,83 +95,17 @@ $itens_pag = intval(@$_GET['itens']);
 						</div>
 					</div>
 
-					<div class="col-md-2 mt-3">
-						<div class="form-group">
-
-
-							<label for="exampleFormControlInput1">Valor</label>
-							<input type="text" class="form-control" id="valor" placeholder="R$" name="valor" value="<?php echo @$valor ?>" required>
-						</div>
-					</div>
-
-					<div class="col-md-3 <?php echo @$dnone ?> mt-3">
-						<div class="form-group">
-							<label for="exampleFormControlSelect1">Categoria</label>
-							<select class="form-control" id="" name="categoria">
-
-
-
-								<?php 
-								//SE EXISTIR EDIÇÃO DOS DADOS, TRAZER O NOME DO ITEM ASSOCIADA AO REGISTRO
-								if(@$_GET['funcao'] == 'editar'){
-
-									$res_dado = $pdo->query("SELECT * from categorias where id = '$categoria'");
-									$dados_dado = $res_dado->fetchAll(PDO::FETCH_ASSOC);
-
-									for ($i=0; $i < count($dados_dado); $i++) { 
-										foreach ($dados_dado[$i] as $key => $value) {
-										}
-
-										$id_dado = $dados_dado[$i]['id'];	
-										$nome_dado = $dados_dado[$i]['nome'];
-
-									}
-
-
-									echo '<option value="'.$id_dado.'">'.$nome_dado.'</option>';
-								}
-								
-
-
-								//TRAZER TODOS OS REGISTROS EXISTENTES
-								$res = $pdo->query("SELECT * from categorias order by nome asc");
-								$dados = $res->fetchAll(PDO::FETCH_ASSOC);
-
-								for ($i=0; $i < count($dados); $i++) { 
-									foreach ($dados[$i] as $key => $value) {
-									}
-
-									$id_item = $dados[$i]['id'];	
-									$nome_item = $dados[$i]['nome'];
-
-									if($nome_dado != $nome_item){
-										echo '<option value="'.$id_item.'">'.$nome_item.'</option>';
-									}
-
-									
-								}
-								?>
-							</select>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="form-group mt-3">
-
-
-					<label for="exampleFormControlInput1">Descrição Longa</label>
-					<textarea maxlength="600" class="form-control" id="descricao_longa" name="descricao_longa"><?php echo @$descricao_longa ?></textarea>
 				</div>
 
 			
-						<div class="form-group mt-3">
-							<label for="inputAddress">Foto</label>
-							<div class="custom-file">
-								<input type="file" name="foto" id="foto">
-							</div>
+			
+				<div class="form-group">
+					<label for="inputAddress">Foto</label>
+					<div class="custom-file">
+						<input type="file" name="foto" id="foto">
+					</div>
 
-						</div>	
+				</div>	
 				
 
 				<?php if(@$_GET['funcao']=='editar'){ ?>
@@ -251,8 +157,8 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Excluir Registro</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+						
 					</button>
 				</div>
 				<div class="modal-body">
@@ -330,8 +236,6 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 </script>
 
 
-
-
 <!--AJAX PARA BUSCAR OS DADOS -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -358,10 +262,6 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 		
 	})
 </script>
-
-
-
-
 
 
 

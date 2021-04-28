@@ -1,7 +1,11 @@
 <?php 
+
+
   $res = $pdo->query("SELECT * FROM produtos");
   $dados = $res->fetchAll(PDO::FETCH_ASSOC);
   $qtd_produtos = count($dados);
+  
+
 
   $soma = $pdo->query("SELECT SUM(valor) AS total FROM produtos")->fetchColumn();
   $media = $soma/$qtd_produtos;
@@ -11,27 +15,7 @@
 
 
 <div class="main-content">
-    <header>
-      <h2>
-        <label for="nav-toggle">
-          <span class="las la-bars"></span>
-        </label>
-        GRX-SOFTWARE
-      </h2>
-
-      <div class="search-wrapper">
-        <span class="las la-search"></span>
-        <input type="search" id="txtbuscar" name="txtbuscar" placeholder="Buscar...">
-      </div>
-
-      <div class="user-wrapper">
-        <img src="../img/profile.jpg" width="50px" height="50px" alt="">
-        <div>
-          <h4 class="log">Convidado</h4>
-          <small>Administrador</small>
-        </div>
-      </div>
-    </header>
+   
 
     <main>
       <div class="cards">
@@ -80,68 +64,54 @@
         <div class="projects">
           <div class="card">
             <div class="card-header">
-              <h3>Compras Recentes</h3>
-              <button>Ver Todos <span class="las la-arrow-right"></span></button>
+              <h3>Produtos Recentes</h3>
+             <a class="btn btn-outline-danger" type="button" href="index.php?acao=produtos">Ver Todos <span class="las la-arrow-right"></span></a>
             </div>
 
             <div class="card-body">
               <table width="100%" class="table-responsive">
                 <thead>
                   <tr>
-                    <td>Nome do Produto</td>
-                    <td>Departamento</td>
-                    <td>Status</td>
+                    <td>Nome</td>
+                    <td>Produto</td>
+                    <td>Categoria</td>
+                    <td>Preço</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>UI/UX Designer</td>
-                    <td>UI Team</td>
-                    <td>
-                      <span class="status purple"></span>
-                      review
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Web developement</td>
-                    <td>Frontend</td>
-                    <td>
-                      <span class="status pink"></span>
-                      in progress
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ushop app</td>
-                    <td>Mobile Team</td>
-                    <td>
-                      <span class="status pink"></span>
-                      pending
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>Ushop app</td>
-                    <td>Mobile Team</td>
-                    <td>
-                      <span class="status orange"></span>
-                      pending
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>Ushop app</td>
-                    <td>Mobile Team</td>
-                    <td>
-                      <span class="status purple"></span>
-                      pending
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>Ushop app</td>
-                    <td>Mobile Team</td>
-                    <td>
-                      <span class="status pink"></span>
-                      pending
-                    </td>
-                  </tr>
+
+                    <?php 
+                       for ($i=0; $i < 6; $i++) { 
+                          foreach ($dados[$i] as $key => $value) {
+                          }
+
+                          $id = $dados[$i]['id']; 
+                          $nome = $dados[$i]['nome'];
+                          
+                          $descricao = $dados[$i]['descricao'];
+                          $valor = $dados[$i]['valor'];
+                          $categoria = $dados[$i]['categoria'];
+                          $imagem = $dados[$i]['imagem'];
+                          
+                          //recuperar o nome da categoria
+                          $res_cat = $pdo->query("SELECT * from categorias where id = '$categoria'");
+                          $dados_cat = $res_cat->fetchAll(PDO::FETCH_ASSOC);
+                          $nome_cat = $dados_cat[0]['nome'];
+
+                           $novo_valor = str_replace('.', ',', $valor);
+
+                     
+                    echo'
+                    <tr>
+                      <td>'.$nome.'</td>
+                      <td> <img src="../img/produtos/'. $imagem.'" width="30"></td>
+                      <td>'.$nome_cat.'</td>
+                      <td>
+                        <span class="status pink"></span>
+                        R$ '. $novo_valor.'
+                      </td>
+                    </tr>';
+                  } ?>
 
                 </tbody>
               </table>
@@ -153,7 +123,8 @@
           <div class="card">
             <div class="card-header">
               <h3>Fornecedores</h3>
-              <button>Ver Todos <span class="las la-arrow-right"></span></button>
+              <!-- button>Ver Todos <span class="las la-arrow-right"></span></button -->
+              <a class="btn btn-outline-danger" type="button" href="#">Ver Todos <span class="las la-arrow-right"></span></a>
             </div>
 
             <div class="card-body">

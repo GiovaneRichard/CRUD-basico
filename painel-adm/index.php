@@ -28,7 +28,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title><?php echo $nome_loja; ?></title>
+<title>Ecommerce</title>
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
@@ -59,6 +59,7 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
    <link rel="stylesheet" type="text/css" href="../css/style.css">
+   <link rel="stylesheet" type="text/css" href="../css/table.css">
 
 </head>
 <body>
@@ -71,9 +72,7 @@
 
 	<div class="sidebar-menu">
 		<ul>
-			<li>
-				<a href="#" class="nav-link"><span class="las la-igloo"></span><span>Dashboard</span></a>
-			</li>
+		
 			<li>
 				<a href="index.php?acao=<?php echo $item1 ?>" class="nav-link <?php echo $item1ativo ?>"><span class="las la-users"></span><span>Home</span></a>
 			</li>
@@ -94,14 +93,7 @@
 
 </div>
 
- <header>
-      <h3>
-        <label for="nav-toggle">
-          <span class="las la-bars"></span>
-        </label>
-        GRX-SOFTWARE
-      </h3>      
- </header>
+<?php include_once("cabecalho.php") ?>
 
 <?php 
 	if(@$_GET['acao'] == $item1){
