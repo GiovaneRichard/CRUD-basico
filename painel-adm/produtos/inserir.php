@@ -20,7 +20,7 @@
 
 	$path ='../../img/produtos/' .$_FILES['foto']['name'];
 	if($_FILES['foto']['name'] == ""){
-		$imagem = "sem-foto.png";
+		$imagem = "sem-foto.jpg";
 	}else{
 		$imagem = $_FILES['foto']['name'];
 	}

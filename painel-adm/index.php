@@ -7,8 +7,8 @@
 	$item1 = 'home';
 	$item2 = 'produtos';
 	$item3 = 'categorias';
-	$item4 = 'estoque';
-	$item5 = 'usuarios';
+	//$item4 = 'estoque';
+	//$item5 = 'usuarios';
 
 
 	if(@$_GET['acao'] == $item1){
@@ -17,10 +17,6 @@
 		$item2ativo = 'active';
 	}else if(@$_GET['acao'] == $item3){
 		$item3ativo = 'active';
-	}else if(@$_GET['acao'] == $item4){
-		$item4ativo = 'active';
-	}else if(@$_GET['acao'] == $item5){
-		$item5ativo = 'active';
 	}
  ?>
 
@@ -66,7 +62,7 @@
 	<input type="checkbox" id="nav-toggle" name="">
 	<div class="sidebar">
 		<div class="sidebar-brand">
-			<h3><span class="lab la-accusoft"></span><span>Painel - Adm</span></h3>
+			<h3><span class="lab la-jedi-order"></span><span>Administrativo</span></h3>
 		</div>
 		
 
@@ -74,7 +70,7 @@
 		<ul>
 		
 			<li>
-				<a href="index.php?acao=<?php echo $item1 ?>" class="nav-link <?php echo $item1ativo ?>"><span class="las la-users"></span><span>Home</span></a>
+				<a href="index.php?acao=<?php echo $item1 ?>" class="nav-link <?php echo $item1ativo ?>"><span class="las la-home"></span><span>Home</span></a>
 			</li>
 			<li>
 				<a href="index.php?acao=<?php echo $item2 ?>" class="nav-link <?php echo $item2ativo ?>"><span class="las la-shopping-bag"></span><span>Produtos</span></a>
@@ -82,12 +78,7 @@
 			<li>
 				<a href="index.php?acao=<?php echo $item3 ?>" class="nav-link <?php echo $item3ativo ?>"><span class="las la-clipboard-list"></span><span>Categorias</span></a>
 			</li>
-			<li>
-				<a href="index.php?acao=<?php echo $item4 ?>" class="nav-link <?php echo $item4ativo ?>"><span class="las la-receipt"></span><span>Estoque</span></a>
-			</li>
-			<li> 
-				<a href="index.php?acao=<?php echo $item5 ?>" class="nav-link <?php echo $item5ativo ?>"><span class="las la-user-circle"></span><span>Usuários</span></a> 
-			</li>
+			
 		</ul>
 	</div>	
 
@@ -102,10 +93,6 @@
         include_once($item2.'.php');
     }else if(@$_GET['acao'] == $item3){
         include_once($item3.'.php');
-    }else if(@$_GET['acao'] == $item4){
-        include_once($item4.'.php');
-    }else if(@$_GET['acao'] == $item5){
-        include_once($item5.'.php');
     }else{
     	include_once($item1.'.php');
     }

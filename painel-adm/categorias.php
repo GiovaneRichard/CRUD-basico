@@ -80,7 +80,7 @@ $itens_pag = intval(@$_GET['itens']);
 
 
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nome</label>
 							<input type="text" class="form-control" id="nome" placeholder="Insira o Nome " name="nome" value="<?php echo @$nome ?>" required>
@@ -95,11 +95,9 @@ $itens_pag = intval(@$_GET['itens']);
 						</div>
 					</div>
 
-				</div>
 
 			
-			
-				<div class="form-group">
+				<div class="form-group mt-4">
 					<label for="inputAddress">Foto</label>
 					<div class="custom-file">
 						<input type="file" name="foto" id="foto">
@@ -107,9 +105,8 @@ $itens_pag = intval(@$_GET['itens']);
 
 				</div>	
 				
-
 				<?php if(@$_GET['funcao']=='editar'){ ?>
-					<img class="mt-4" src="../img/produtos/<?php echo $imagem ?>" width="150">
+					<img src="../img/categorias/<?php echo $imagem ?>" class="mt-4" width="150" >
 				<?php } ?>
 
 
@@ -120,7 +117,7 @@ $itens_pag = intval(@$_GET['itens']);
 			</div>
 			<div class="modal-footer">
 
-				<input type="hidden" id="id" name="id" value="<?php echo @$id_reg ?>">
+				<input type="hidden" id="id" name="id" value="<?php echo @$id ?>">
 
 				<input type="hidden" id="reg_antigo" name="reg_antigo" value="<?php echo @$nome ?>" required>
 

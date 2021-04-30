@@ -138,7 +138,6 @@ $itens_pag = intval(@$_GET['itens']);
 							<select class="form-control" id="" name="categoria">
 
 
-
 								<?php 
 								//SE EXISTIR EDIÇÃO DOS DADOS, TRAZER O NOME DO ITEM ASSOCIADA AO REGISTRO
 								if(@$_GET['funcao'] == 'editar'){

@@ -82,7 +82,7 @@ echo '
 			
 			
 			<td>'.$descricao.'</td>
-			<td><img src="../images/categorias/'.$imagem.'" width="50"></td>
+			<td><img src="../img/categorias/'.$imagem.'" width="50"></td>
 			
 			
 			<td>

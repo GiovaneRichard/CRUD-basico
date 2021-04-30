@@ -49,7 +49,7 @@
           <div class="col-md-7">
             <div class="card-body">
               <div class="brand-wrapper">
-                <img src="img/logo.png" alt="logo" class="logo" width="180">
+                <img src="img/logotipo.png" alt="logo" class="logo" width="260">
               </div>
               <p class="login-card-description ">Faça seu Login</p>
 

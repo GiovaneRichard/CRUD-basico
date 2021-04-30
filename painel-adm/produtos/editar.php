@@ -23,7 +23,7 @@ $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
 //SCRIPT PARA FOTO NO BANCO
 $caminho = '../../img/produtos/' .$_FILES['foto']['name'];
     if ($_FILES['foto']['name'] == ""){
-      $imagem = "sem-foto.png";
+      $imagem = "../../img/sem-foto.jpg";
     }else{
       $imagem = $_FILES['foto']['name']; 
     }
