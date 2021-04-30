@@ -81,7 +81,13 @@
                 <tbody>
 
                     <?php 
-                       for ($i=0; $i < count($dados); $i++) { 
+
+                      @$list_prod = count($dados);
+
+                      if($list_prod > 6){$list_prod = 6;}
+                      if($list_prod == 0){$list_prod = 0;}
+
+                      for ($i=0; $i < $list_prod; $i++) { 
                           foreach ($dados[$i] as $key => $value) {
                           }
 

@@ -78,6 +78,8 @@ echo '
 			$dados_cat = $res_cat->fetchAll(PDO::FETCH_ASSOC);
 			$nome_cat = $dados_cat[0]['nome'];
 
+			$valor = number_format($valor, 2, ',', '.');
+
 echo '
 		<tr>
 
@@ -86,7 +88,7 @@ echo '
 			
 			
 			<td class="d-none d-md-block">'.$descricao.'</td>
-			<td>'.$valor.'</td>
+			<td>R$  '.$valor.'</td>
 			<td class="d-none d-md-block">'.$nome_cat.'</td>
 			<td><img src="../img/produtos/'.$imagem.'" width="50"></td>
 			
