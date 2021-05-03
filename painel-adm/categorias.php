@@ -46,13 +46,12 @@ $itens_pag = intval(@$_GET['itens']);
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<?php if(@$_GET['funcao']=='editar'){
-					$titulo_modal = 'Editar Categoria';
+					$titulo_modal = 'Editar Dados';
 					$botao = 'Editar';
-
 
 					//RECUPERAR OS DADOS COM BASE NO ID QUE RECEBO
 					$id = @$_GET['id'];
@@ -69,67 +68,68 @@ $itens_pag = intval(@$_GET['itens']);
 					$form = 'form-inserir';
 				} ?>
 				<h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo_modal ?>
-			</h5>
-			<button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
-				<
-			</button>
+				</h5>
+				<button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+					
+				</button>
+			</div>
+			<div class="modal-body">
+
+
+				<form id="<?php echo $form ?>" method="post" enctype="multipart/form-data">
+
+					<div class="form-group mt-4">
+
+
+						<label for="exampleFormControlInput1">Nome</label>
+						<input type="text" class="form-control" id="nome" placeholder="Insira o Nome " name="nome" value="<?php echo @$nome ?>" required>
+					</div>
+
+					<div class="form-group mt-4">
+
+
+						<label for="exampleFormControlInput1">Descrição</label>
+						<input type="text" class="form-control" id="descricao" placeholder="Insira a Descrição " name="descricao" value="<?php echo @$nome ?>" required>
+					</div>
+
+					
+
+						<div class="form-group mt-4">
+						<label for="inputAddress">Foto</label>
+						<div class="custom-file">
+							 
+								<input type="file" name="foto" id="foto">
+
+
+							</div>
+
+						</div>
+
+						<?php if(@$_GET['funcao']=='editar'){ ?>
+						<img class="mt-4" src="../img/categorias/<?php echo $imagem ?>" width="150">
+						<?php } ?>
+
+
+						<div align="center" id="mensagem" class="">
+
+						</div>
+
+					</div>
+					<div class="modal-footer">
+
+						<input type="hidden" id="id" name="id" value="<?php echo @$id ?>">
+
+						<input type="hidden" id="reg_antigo" name="reg_antigo" value="<?php echo @$nome ?>" required>
+
+						<button id="btn-fechar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+						<button type="submit" name="<?php echo $botao ?>" id="<?php echo $botao ?>" class="btn btn-primary"><?php echo $botao ?></button>
+
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="modal-body">
-
-			<form id="<?php echo $form ?>" method="post" enctype="multipart/form-data">
-
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Nome</label>
-							<input type="text" class="form-control" id="nome" placeholder="Insira o Nome " name="nome" value="<?php echo @$nome ?>" required>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-
-
-							<label for="exampleFormControlInput1">Descrição</label>
-							<input type="text" class="form-control" id="descricao" placeholder="Insira a Descrição " name="descricao" value="<?php echo @$descricao ?>" required>
-						</div>
-					</div>
-
-
-			
-				<div class="form-group mt-4">
-					<label for="inputAddress">Foto</label>
-					<div class="custom-file">
-						<input type="file" name="foto" id="foto">
-					</div>
-
-				</div>	
-				
-				<?php if(@$_GET['funcao']=='editar'){ ?>
-					<img src="../img/categorias/<?php echo $imagem ?>" class="mt-4" width="150" >
-				<?php } ?>
-
-
-				<div align="center" id="mensagem" class="">
-
-				</div>
-
-			</div>
-			<div class="modal-footer">
-
-				<input type="hidden" id="id" name="id" value="<?php echo @$id ?>">
-
-				<input type="hidden" id="reg_antigo" name="reg_antigo" value="<?php echo @$nome ?>" required>
-
-				<button id="btn-fechar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-
-				<button type="submit" name="<?php echo $botao ?>" id="<?php echo $botao ?>" class="btn btn-primary"><?php echo $botao ?></button>
-
-			</div>
-		</form>
 	</div>
-</div>
-</div>
 
 
 
@@ -144,6 +144,10 @@ if(@$_GET['funcao'] == 'novo' || @$_GET['funcao'] == 'editar'){
 
 
 
+
+
+
+<!--CHAMADA DA MODAL DELETAR -->
 <?php 
 if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){ 
 	$id = $_GET['id'];
@@ -186,51 +190,54 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 
 
 
-<script type="text/javascript">
-	$("#form-inserir").submit(function () {
-		var pag = "<?=$pagina?>";
-		event.preventDefault();
-		var formData = new FormData(this);
+<!--AJAX PARA INSERÇÃO DOS DADOS COM IMAGEM -->
+	<script type="text/javascript">
+		$("#form-inserir").submit(function () {
+	var pag = "<?=$pagina?>";
+	event.preventDefault();
+    var formData = new FormData(this);
 
-		$.ajax({
-			url: pag + "/inserir.php",
-			type: 'POST',
-			data: formData,
+    $.ajax({
+       url: pag + "/inserir.php",
+        type: 'POST',
+        data: formData,
 
-			success: function(mensagem){
+        success: function(mensagem){
 
-				$('#mensagem').removeClass()
+                    $('#mensagem').removeClass()
 
-				if(mensagem == 'Cadastrado com Sucesso!!'){
+                    if(mensagem == 'Cadastrado com Sucesso!!'){
+                        
+                        $('#btn-buscar').click();
+           				$('#btn-fechar').click();
 
-					$('#btn-buscar').click();
-					$('#btn-fechar').click();
+                    }else{
+                        
+                        $('#mensagem').addClass('text-danger')
+                    }
+                    
+                    $('#mensagem').text(mensagem)
 
-				}else{
+                },
 
-					$('#mensagem').addClass('text-danger')
-				}
-
-				$('#mensagem').text(mensagem)
-
-			},
-
-
-			cache: false,
-			contentType: false,
-			processData: false,
+       
+        cache: false,
+        contentType: false,
+        processData: false,
         xhr: function() {  // Custom XMLHttpRequest
-        	var myXhr = $.ajaxSettings.xhr();
+            var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
-            	myXhr.upload.addEventListener('progress', function () {
-            		/* faz alguma coisa durante o progresso do upload */
-            	}, false);
+                myXhr.upload.addEventListener('progress', function () {
+                    /* faz alguma coisa durante o progresso do upload */
+                }, false);
             }
-            return myXhr;
+        return myXhr;
         }
     });
-	});
+});
 </script>
+
+
 
 
 <!--AJAX PARA BUSCAR OS DADOS -->
@@ -263,6 +270,10 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 
 
 
+
+
+
+
 <!--AJAX PARA LISTAR OS DADOS -->
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -286,61 +297,69 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 
 
 
+<!--AJAX PARA BUSCAR OS DADOS PELA TXT -->
 <script type="text/javascript">
-	$('#cbbuscar').change(function(){
+	$('#txtbuscar').keyup(function(){
 		$('#btn-buscar').click();
 	})
 </script>
 
 
 
-<script type="text/javascript">
-	$("#form-editar").submit(function () {
-		var pag = "<?=$pagina?>";
-		event.preventDefault();
-		var formData = new FormData(this);
 
-		$.ajax({
-			url: pag + "/editar.php",
-			type: 'POST',
-			data: formData,
 
-			success: function(mensagem){
+<!--AJAX PARA EDIÇÃO DOS DADOS COM IMAGEM -->
+	<script type="text/javascript">
+		$("#form-editar").submit(function () {
+	var pag = "<?=$pagina?>";
+	event.preventDefault();
+    var formData = new FormData(this);
 
-				$('#mensagem').removeClass()
+    $.ajax({
+       url: pag + "/editar.php",
+        type: 'POST',
+        data: formData,
 
-				if(mensagem == 'Editado com Sucesso!!'){
+        success: function(mensagem){
 
-					$('#btn-buscar').click();
-					$('#btn-fechar').click();
+                    $('#mensagem').removeClass()
 
-				}else{
+                    if(mensagem == 'Editado com Sucesso!!'){
+                        
+                        $('#btn-buscar').click();
+           				$('#btn-fechar').click();
 
-					$('#mensagem').addClass('text-danger')
-				}
+                    }else{
+                        
+                        $('#mensagem').addClass('text-danger')
+                    }
+                    
+                    $('#mensagem').text(mensagem)
 
-				$('#mensagem').text(mensagem)
+                },
 
-			},
-
-			cache: false,
-			contentType: false,
-			processData: false,
+       
+        cache: false,
+        contentType: false,
+        processData: false,
         xhr: function() {  // Custom XMLHttpRequest
-        	var myXhr = $.ajaxSettings.xhr();
+            var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
-            	myXhr.upload.addEventListener('progress', function () {
-            		/* faz alguma coisa durante o progresso do upload */
-            	}, false);
+                myXhr.upload.addEventListener('progress', function () {
+                    /* faz alguma coisa durante o progresso do upload */
+                }, false);
             }
-            return myXhr;
+        return myXhr;
         }
     });
-	});
+});
 </script>
 
 
 
+
+
+<!--AJAX PARA EXCLUSÃO DOS DADOS -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		var pag = "<?=$pagina?>";
@@ -356,18 +375,20 @@ if(@$_GET['funcao'] == 'excluir' && @$item_paginado == ''){
 
 					$('#mensagem_excluir').removeClass()
 
-					if(mensagem == 'Excluído com Sucesso!!'){
-
-						$('#txtbuscar').val('')
+                    if(mensagem == 'Excluído com Sucesso!!'){
+                        
+                        $('#txtbuscar').val('')
 						$('#btn-buscar').click();
 						$('#btn-cancelar-excluir').click();
 
-					}else{
+                    }else{
+                        
+                        $('#mensagem_excluir').addClass('text-danger')
+                    }
+                    
+                    $('#mensagem_excluir').text(mensagem)
 
-						$('#mensagem_excluir').addClass('text-danger')
-					}
-
-					$('#mensagem_excluir').text(mensagem)	
+					
 
 				},
 				
