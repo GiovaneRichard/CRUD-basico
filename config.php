@@ -10,13 +10,20 @@
 	$host = 'localhost';
 	$usuario = 'root';
 	$senha = '';
-*/
 
 	// DADOS PARA CONEXÃO NUVEM
 	$banco = 'd4i69q99i2fkmk';
 	$host = 'ec2-18-214-195-34.compute-1.amazonaws.com';
 	$usuario = 'shvmqczpqhawyq';
 	$senha = '475a3006ca4839843ca95f547df33591d52a62ce94bfce40b144cfecb2db566a';
+*/
+
+	
+
+	$banco = 'id16748660_db_ecommerce01';
+	$host = 'localhost';
+	$usuario = 'id16748660_giovanerichard147';
+	$senha = 'GRXblackhat_147';
 
 
 //CONFIGURAÇÕES PARA PAGINAÇÃO DE ITENS NO PAINEL
