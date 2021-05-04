@@ -1,7 +1,8 @@
 <?php 
 	
 	$email_adm = 'giovanerichard@gmail.com';
-	$url_site = 'http://localhost/crud_basico';
+	//$url_site = 'http://localhost/crud-ecommerce';
+	$url_site = 'https://crud-ecommerce.herokuapp.com/';
 
 /*
 	// DADOS PARA CONEXÃO LOCAL
