@@ -12,7 +12,7 @@ echo '
 	<thead >
 		<tr>
 			<th scope="col">Nome</th>
-			<th scope="col">Descrição</th>
+			<th scope="col" class="d-none d-md-block">Descrição</th>
 			<th scope="col">Imagem</th>
 			
 			<th scope="col">Ações</th>
@@ -81,7 +81,7 @@ echo '
 			<td>'.$nome.'</td>
 			
 			
-			<td>'.$descricao.'</td>
+			<td class="d-none d-md-block">'.$descricao.'</td>
 			<td><img src="../img/categorias/'.$imagem.'" width="50"></td>
 			
 			

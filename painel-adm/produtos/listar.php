@@ -14,9 +14,9 @@ echo '
 	  <thead>
 	    <tr>
 	      <th scope="col">Nome</th>
-	      <th scope="col">Descrição</th>
+	      <th scope="col" class="d-none d-md-block">Descrição</th>
 	      <th scope="col">Valor</th>
-	      <th scope="col">Categoria</th>
+	      <th scope="col" class="d-none d-md-block">Categoria</th>
 	      <th scope="col">Imagem</th>
 
 	      <th scope="col">Ações</th>

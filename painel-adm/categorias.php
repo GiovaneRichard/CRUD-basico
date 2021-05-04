@@ -12,7 +12,7 @@ $itens_pag = intval(@$_GET['itens']);
 <div class="container ml-2 mr-2">
 	<nav class="navbar navbar-expand navbar-white navbar-light">
 		
-		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Nova Categoria</a>
+		<a id="btn-novo" type="button" class="btn btn-primary d-inline" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Nova Categoria</a>
 		
 		<form method="post" id="frm">
 			<input type="hidden" name="pag" id="pag" value="<?php echo $pagina_pag ?>">

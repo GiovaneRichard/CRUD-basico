@@ -70,7 +70,7 @@
 	padding-right: 1rem;
 }
 
-/**/
+
 
 #nav-toggle:checked + .sidebar{
 	width: 70px;
@@ -100,7 +100,7 @@
 	left: 70px;
 }
 
-/**/
+
 .main-content{
 	transition: margin-left 300ms;
 	margin-left: 345px;
@@ -185,6 +185,8 @@ main{
 	margin-top: 1rem;
 
 }
+
+
 
 .card-single{
 	display: flex;
@@ -502,7 +504,10 @@ tr td:last-child{
 	.cards{
 		grid-template-columns: 100%;
 	}
+
 }
+
+
 
 .direita{
 	display: flex;

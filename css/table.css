@@ -1,6 +1,8 @@
 :root{
 	--table-color: #2a9d8f;
 }
+
+
 .content-table{
 	border-collapse: collapse;
 	width: 100%;
@@ -37,4 +39,13 @@
 
 .content-table tbody tr:last-of-type{
 	border-bottom: 2px solid var(--table-color);
+}
+
+/* media screen*/
+@media screen and (max-width: 480px){
+
+}
+
+@media only screen and (min-width: 1200px){
+
 }
