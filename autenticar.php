@@ -3,38 +3,44 @@
 	require_once("conexao.php");
 	@session_start();
 
-	if(empty($_POST['username']) || empty($_POST['password'])){
-		echo "<script language='javascript'>window.location='index.php';</script>";
-	}
 
-	$usuario = $_POST['username'];
-	$senha = $_POST['password'];
+	$token = $_POST['token'];
 
-	$res = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = :usuario AND senha = md5(:senha)");
-
-	$res->bindValue(":usuario", $usuario);
-	$res->bindValue(":senha", $senha);
-	$res->execute();
-
+	$res = $pdo->query("SELECT * FROM usuarios where senha = '$token'and nivel = 'Admin' ");
 	$dados = $res->fetchAll(PDO::FETCH_ASSOC);
 	$linhas = count($dados);
 
+
 	if($linhas > 0){
-		$_SESSION['nome_usuario'] = $dados[0]['nome'];
-		$_SESSION['email_usuario'] = $dados[0]['usuario'];
-		$_SESSION['nivel_usuario'] = $dados[0]['nivel'];
-		$_SESSION['cpf_usuario'] = $dados[0]['cpf'];
+		$_SESSION['token_usuario'] = $dados[0]['senha'];
+
+		$token = $_SESSION['token_usuario'];
+	
+ 			
+		$url = "https://miniapp-ifnmg.herokuapp.com/usuario/";
+
+		$nova_url = $url . $token;
+
+		$resultado = json_decode(file_get_contents($nova_url));
 
 
-		if($_SESSION['nivel_usuario'] == 'Admin'){
+		if($resultado->login == true){
 			echo "<script language='javascript'>window.location='painel-adm/index.php'; </script>";
 			exit();
-		}
+		}else{
+			echo "<script language='javascript'>window.alert('Token [ $token ] Inválido!'); </script>";
+			echo "<script language='javascript'>window.location='index.php'; </script>";
+
+		}	
+	
+	
+
 
 	}else{
-			echo "<script language='javascript'>window.alert('Dados de Usuário ou Senha Incorretos!'); </script>";
-			echo "<script language='javascript'>window.location='index.php'; </script>";
-		}
+		echo "<script language='javascript'>window.alert('Token [ $token ] Inválido!'); </script>";
+		echo "<script language='javascript'>window.location='index.php'; </script>";
+	}
+	
 
 
  ?>

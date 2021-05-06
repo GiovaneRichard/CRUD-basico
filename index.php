@@ -1,11 +1,17 @@
 <?php 
 
   include_once("conexao.php");
-  /*
-  if(isset($_POST['email2']) and $_POST['email2'] != ''){
-     $email_rec = $_POST['email2'];
-  }
-  */
+
+ //VERIFICAR SE EXISTE UM USUÁRIO ADMINISTRADOR, CASO NÃO EXISTA, CRIAR.
+$senha = '320bf01f6a87';
+$res_usuarios = $pdo->query("SELECT * from usuarios where nivel = 'Admin'");
+$dados_usuarios = $res_usuarios->fetchAll(PDO::FETCH_ASSOC);
+$total_usuarios = count($dados_usuarios);
+
+if($total_usuarios == 0){
+  $res_insert = $pdo->query("INSERT into usuarios (nome, cpf, telefone, usuario, senha, nivel) values ('Administrador', '000.000.000-00', '3333-3333', '$email_adm', '$senha', 'Admin')");
+}
+
 
  ?>
 
@@ -53,7 +59,7 @@
               </div>
               <p class="login-card-description ">Faça seu Login</p>
 
-              <form class="login100-form validate-form" method="post" action="api/index.php">
+              <form class="login100-form validate-form" method="post" action="autenticar.php" id="form-login">
 
                   <div class="form-group">
                     <span class="text-muted" >Token de Acesso</span><br>
@@ -79,3 +85,21 @@
 </body>
 </html>
 
+<script type="text/javascript">
+  $(function(){
+    $("#form-login").on('submit', function(e){
+
+      //$("#carregando").css("display", "block");
+
+      $.post("autenticar.php", 
+        $("#form-login").serialize(),
+        function(data){
+
+          //$("#carregando").css("display", "none");
+          <?php echo "Logado com sucesso!!" ?>
+
+        });
+
+    });
+  });
+</script>
