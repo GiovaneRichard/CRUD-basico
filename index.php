@@ -1,17 +1,11 @@
 <?php 
 
   include_once("conexao.php");
-
- //VERIFICAR SE EXISTE UM USUÁRIO ADMINISTRADOR, CASO NÃO EXISTA, CRIAR.
-$senha = '320bf01f6a87';
-$res_usuarios = $pdo->query("SELECT * from usuarios where nivel = 'Admin'");
-$dados_usuarios = $res_usuarios->fetchAll(PDO::FETCH_ASSOC);
-$total_usuarios = count($dados_usuarios);
-
-if($total_usuarios == 0){
-  $res_insert = $pdo->query("INSERT into usuarios (nome, cpf, telefone, usuario, senha, nivel) values ('Administrador', '000.000.000-00', '3333-3333', '$email_adm', '$senha', 'Admin')");
-}
-
+  /*
+  if(isset($_POST['email2']) and $_POST['email2'] != ''){
+     $email_rec = $_POST['email2'];
+  }
+  */
 
  ?>
 
@@ -25,8 +19,8 @@ if($total_usuarios == 0){
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta name="description" content="Lanches BH, Lanches em Venda Nova, Comprar Sanduíche Venda Nova ">
-    <meta name="author" content="Hugo Vasconcelos">
+    <meta name="description" content="Supermercado delivery, Delivery Montezuma, Comprar supermercado Montezuma, Montezuma ">
+    <meta name="author" content="Giovane Richard">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -59,7 +53,7 @@ if($total_usuarios == 0){
               </div>
               <p class="login-card-description ">Faça seu Login</p>
 
-              <form class="login100-form validate-form" method="post" action="autenticar.php" id="form-login">
+              <form class="login100-form validate-form" method="post" action="api/index.php">
 
                   <div class="form-group">
                     <span class="text-muted" >Token de Acesso</span><br>
@@ -85,21 +79,3 @@ if($total_usuarios == 0){
 </body>
 </html>
 
-<script type="text/javascript">
-  $(function(){
-    $("#form-login").on('submit', function(e){
-
-      //$("#carregando").css("display", "block");
-
-      $.post("autenticar.php", 
-        $("#form-login").serialize(),
-        function(data){
-
-          //$("#carregando").css("display", "none");
-          <?php echo "Logado com sucesso!!" ?>
-
-        });
-
-    });
-  });
-</script>

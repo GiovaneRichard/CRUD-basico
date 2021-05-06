@@ -242,7 +242,7 @@ main{
 }
 
 .card-header button{
-	background: var(--main-color2);
+	background: var(--main-color);
 	border-radius: 10px;
 	color: #fff;
 	font-size: .8rem;
@@ -252,7 +252,7 @@ main{
 }
 
 .card-header .btn{
-	background: var(--main-color2);
+	background: var(--main-color);
 	border-radius: 10px;
 	color: #fff;
 	font-size: .8rem;

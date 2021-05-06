@@ -12,7 +12,7 @@ $itens_pag = intval(@$_GET['itens']);
 <div class="container ml-2 mr-2">
 	<nav class="navbar navbar-expand navbar-white navbar-light">
 		
-		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo">Novo Produto</a>
+		<a id="btn-novo" type="button" class="btn btn-primary" href="index.php?acao=<?php echo $pagina ?>&funcao=novo" style="background: #2a9d8f; border: none;">Novo Produto</a>
 		
 		<form method="post" id="frm">
 			<input type="hidden" name="pag" id="pag" value="<?php echo $pagina_pag ?>">
@@ -132,7 +132,7 @@ $itens_pag = intval(@$_GET['itens']);
 						</div>
 					</div>
 
-					<div class="col-md-3 <?php echo @$dnone ?> mt-3">
+					<div class="col-md-3 <?php echo @$categorias ?> mt-3">
 						<div class="form-group">
 							<label for="exampleFormControlSelect1">Categoria</label>
 							<select class="form-control" id="" name="categoria">
